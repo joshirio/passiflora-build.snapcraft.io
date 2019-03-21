@@ -10,6 +10,12 @@ grade: stable
 confinement: strict
 base: core18 # based on ubuntu 18.04 LTS
 
+plugs: # additional plug to fix mouse cursor theme
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+
 apps:
   passiflora:
     command: desktop-launch passiflora
@@ -57,6 +63,7 @@ parts:
       - qtwayland5
       - zlib1g
       - dbus
+      - qt5-style-plugins # for mouse cursor theme fix
     after: [desktop-qt5]
 
   desktop-qt5: # custom define becasue no remote parts are supported when using a base (at least not on 16.04), https://github.com/ubuntu/snapcraft-desktop-helpers
